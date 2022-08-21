@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StringSplitExtensions", "StringSplitExtensions\StringSplitExtensions.csproj", "{A236D618-3D7D-4254-BD90-58F8D01DCCDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringSplitExtensions.Tests", "StringSplitExtensions.Tests\StringSplitExtensions.Tests.csproj", "{2311036F-A704-4D19-9E56-6A79EE67BA20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A236D618-3D7D-4254-BD90-58F8D01DCCDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A236D618-3D7D-4254-BD90-58F8D01DCCDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A236D618-3D7D-4254-BD90-58F8D01DCCDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A236D618-3D7D-4254-BD90-58F8D01DCCDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2311036F-A704-4D19-9E56-6A79EE67BA20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2311036F-A704-4D19-9E56-6A79EE67BA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2311036F-A704-4D19-9E56-6A79EE67BA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2311036F-A704-4D19-9E56-6A79EE67BA20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC122B28-46E3-4409-8389-C6430EDBC07E}
+	EndGlobalSection
+EndGlobal
