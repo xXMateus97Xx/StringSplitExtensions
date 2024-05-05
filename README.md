@@ -42,3 +42,15 @@ foreach (ReadOnlySpan<char> splitted in toSplit.SplitAnyFast(splitIn, StringSpli
     // Use string
 }
 ```
+
+Split in Any Char With SearchValues<char>
+
+```cs
+string toSplit = GetString();
+SearchValues<char> splitIn = SearchValues.Create(new[] { ',', ';' });
+
+foreach (ReadOnlySpan<char> splitted in toSplit.SplitAnyFast(splitIn, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+{
+    // Use string
+}
+```

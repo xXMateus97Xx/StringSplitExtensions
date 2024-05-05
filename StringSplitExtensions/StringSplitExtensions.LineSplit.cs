@@ -1,7 +1,11 @@
-﻿namespace StringSplitIndex
+﻿using System.Buffers;
+
+namespace StringSplitIndex
 {
     public static partial class StringSplitExtensions
     {
+        private static readonly SearchValues<char> _lineBreakChars = SearchValues.Create(new[] { '\n', '\r' });
+
         public static LineSplitEnumerator SplitLines(this string str)
         {
             return new LineSplitEnumerator(str.AsSpan());
@@ -30,7 +34,7 @@
                 if (span.Length == 0)
                     return false;
 
-                var index = span.IndexOfAny('\r', '\n');
+                var index = span.IndexOfAny(_lineBreakChars);
                 if (index == -1)
                 {
                     _str = ReadOnlySpan<char>.Empty;

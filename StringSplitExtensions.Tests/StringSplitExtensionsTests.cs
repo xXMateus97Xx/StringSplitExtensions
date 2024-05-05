@@ -1,5 +1,6 @@
 using StringSplitIndex;
 using System;
+using System.Buffers;
 using Xunit;
 
 namespace StringSplitExtensions.Tests
@@ -127,6 +128,52 @@ namespace StringSplitExtensions.Tests
             var splitted = str.Split(split, options);
 
             foreach (var item in str.SplitAnyFast(split, options))
+            {
+                Assert.True(item.SequenceEqual(splitted[count]));
+                count++;
+            }
+
+            Assert.Equal(count, splitted.Length);
+        }
+
+        [Theory]
+        [InlineData(Test, new[] { ' ' }, StringSplitOptions.None)]
+        [InlineData(Test, new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { ' ' }, StringSplitOptions.TrimEntries)]
+        [InlineData(Test, new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'i' }, StringSplitOptions.None)]
+        [InlineData(Test, new[] { 'i' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'i' }, StringSplitOptions.TrimEntries)]
+        [InlineData(Test, new[] { 'i' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'z' }, StringSplitOptions.None)]
+        [InlineData(Test, new[] { 'z' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'z' }, StringSplitOptions.TrimEntries)]
+        [InlineData(Test, new[] { 'z' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'A', 'a' }, StringSplitOptions.None)]
+        [InlineData(Test, new[] { 'A', 'a' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'A', 'a' }, StringSplitOptions.TrimEntries)]
+        [InlineData(Test, new[] { 'A', 'a' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'T', 'e', 's', 't', ' ' }, StringSplitOptions.None)]
+        [InlineData(Test, new[] { 'T', 'e', 's', 't', ' ' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(Test, new[] { 'T', 'e', 's', 't', ' ' }, StringSplitOptions.TrimEntries)]
+        [InlineData(Test, new[] { 'T', 'e', 's', 't', ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(" ", new[] { ' ' }, StringSplitOptions.None)]
+        [InlineData(" ", new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(" ", new[] { ' ' }, StringSplitOptions.TrimEntries)]
+        [InlineData(" ", new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(" ", new[] { 'z' }, StringSplitOptions.None)]
+        [InlineData(" ", new[] { 'z' }, StringSplitOptions.RemoveEmptyEntries)]
+        [InlineData(" ", new[] { 'z' }, StringSplitOptions.TrimEntries)]
+        [InlineData(" ", new[] { 'z' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)]
+
+        public void StringSplitSearchValues(string str, char[] split, StringSplitOptions options)
+        {
+            var count = 0;
+            var splitted = str.Split(split, options);
+
+            var searchValues = SearchValues.Create(split);
+
+            foreach (var item in str.SplitAnyFast(searchValues, options))
             {
                 Assert.True(item.SequenceEqual(splitted[count]));
                 count++;
